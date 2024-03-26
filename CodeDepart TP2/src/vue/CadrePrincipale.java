@@ -8,6 +8,8 @@
  *********************************************************************/
 package vue;
 
+import vue.centreOperation.Console;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -31,25 +33,28 @@ public class CadrePrincipale extends JFrame {
      * */
     public CadrePrincipale() {
         PanneauPrincipale panneauPrincipal = new PanneauPrincipale();
+
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
 
-            //TODO FIX THIS
-//            public void windowClosing(WindowEvent we) {
-//                //
-//                int result = JOptionPane.showConfirmDialog(this,
-//                        "Voulez-vous quitter le progrmame?", "Exit Confirmation : ",
-//                        JOptionPane.YES_NO_OPTION);
-//                if (result == JOptionPane.YES_OPTION){
-//                    //TODO FIX THIS
-//                }
-//            }
+            public void windowClosing(WindowEvent we) {
+                //
+                int result = JOptionPane.showConfirmDialog(this,
+                        "Voulez-vous quitter le progrmame?", "Exit Confirmation : ",
+                        JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION){
+                    //TODO FIX THIS
+                }
+            }
         });
         // this.pack();
-
         this.setContentPane(panneauPrincipal);
+
+        Console console = new Console();
+        this.add(console);
+
 
         this.setVisible(true);
     }
