@@ -4,53 +4,35 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PanneauPrincipale extends JPanel {
-
     public PanneauPrincipale() {
-        this.setBackground(Color.RED);
-        this.setSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()));
+        setLayout(new GridBagLayout());
+
+        JPanel panneauPrincipal = new JPanel();
+        panneauPrincipal.setBackground(Color.RED);
+        panneauPrincipal.setOpaque(true);
+
+        JPanel console = new JPanel();
+        console.setBackground(Color.BLUE);
+        console.setOpaque(true);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0.75;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(panneauPrincipal, gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 0.25;
+        add(console, gbc);
     }
 
-public class panneauPrincipale {
-    public static void main(String[] args) {
-        panneauPrincipale();
+    public void ajouterComposantPrincipal(Component composant, int x, int y) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = x;
+        gbc.gridy = y;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(composant, gbc);
     }
-
-    public static void panneauPrincipale() {
-        // Create a JFrame instance
-        JFrame aFrame = new JFrame("Main Frame");
-        // Get the screen size
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        // Calculate the size for the JPanel (75% of the screen)
-        int panelWidth = (int) (screenSize.width * 0.75);
-        int panelHeight = (int) (screenSize.height * 0.75);
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.GREEN); // Set background color (optional)
-
-        // Set the size of the JPanel
-        panel.setPreferredSize(new Dimension(panelWidth, panelHeight));
-
-        // Create a BorderLayout for the JFrame's content pane
-        aFrame.getContentPane().setLayout(new BorderLayout());
-
-        // Add the JPanel to the WEST position (aligns it to the left)
-        aFrame.getContentPane().add(panel, BorderLayout.WEST);
-
-        // Set default close operation
-        aFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Pack the frame to fit its contents
-        aFrame.pack();
-
-        // Center the frame on the screen
-        aFrame.setLocationRelativeTo(null);
-
-        // Make the frame visible
-        aFrame.setVisible(true);
-    }
-}}
-
-
-
-
-
+}

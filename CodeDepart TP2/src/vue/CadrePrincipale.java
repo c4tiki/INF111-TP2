@@ -6,7 +6,7 @@
  * principal qui au moment de la fermeture affiche une demande de
  * confirmation.
  *********************************************************************/
-package vue;
+/*package vue;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,14 +21,6 @@ public class CadrePrincipale extends JFrame {
 
         CadrePrincipale cadrePrincipale = new CadrePrincipale();
     }
-    /**
-     * Initialise et affiche le cadre Principal
-     *
-     * Cette méthode créé un JFrame servant de cadre principal de l'application
-     * Elle configure sa taille à la taille de l'écran et affiche un message de
-     * confirmation à la chaque tentative de fermeture de la fenètre de la part
-     * de l'utilisateur
-     * */
     public CadrePrincipale() {
         PanneauPrincipale panneauPrincipal = new PanneauPrincipale();
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -36,22 +28,65 @@ public class CadrePrincipale extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
 
-            //TODO FIX THIS
-//            public void windowClosing(WindowEvent we) {
-//                //
-//                int result = JOptionPane.showConfirmDialog(this,
-//                        "Voulez-vous quitter le progrmame?", "Exit Confirmation : ",
-//                        JOptionPane.YES_NO_OPTION);
-//                if (result == JOptionPane.YES_OPTION){
-//                    //TODO FIX THIS
-//                }
-//            }
+            public void windowClosing(WindowEvent we) {
+                int result = JOptionPane.showConfirmDialog(CadrePrincipale.this,
+                        "Voulez-vous quitter le progrmame?", "Exit Confirmation : ",
+                        JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                } else if (result == JOptionPane.NO_OPTION) {
+                    setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                }
+            }
         });
-        // this.pack();
 
         this.setContentPane(panneauPrincipal);
-
         this.setVisible(true);
     }
 }
+ */
 
+package vue;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class CadrePrincipale extends JFrame {
+    private PanneauPrincipale panneauPrincipale;
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            CadrePrincipale cadrePrincipale = new CadrePrincipale();
+            cadrePrincipale.setVisible(true);
+        });
+    }
+
+    public CadrePrincipale() {
+        setTitle("Cadre Principal");
+
+        panneauPrincipale = new PanneauPrincipale();
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        setLocationRelativeTo(null);
+
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                int result = JOptionPane.showConfirmDialog(CadrePrincipale.this,
+                        "Voulez-vous quitter le programme?", "Confirmation de sortie",
+                        JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    dispose();
+                } else if (result == JOptionPane.NO_OPTION) {
+                }
+            }
+        });
+
+        add(panneauPrincipale);
+    }
+}
