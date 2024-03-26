@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class PanneauPrincipale {extends JPanel{
+public class PanneauPrincipale extends JPanel{
     public static void main(String[] args) {
         panneauPrincipale1();
     }
@@ -47,7 +47,7 @@ public class PanneauPrincipale {extends JPanel{
 }
 
 
-}
+
 
 
 
