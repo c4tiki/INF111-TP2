@@ -1,4 +1,6 @@
 package vue.centreOperation;
 
-public class CmdDeplacement {
+import javax.swing.*;
+
+public class CmdDeplacement extends JPanel {
 }

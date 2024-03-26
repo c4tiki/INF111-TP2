@@ -6,26 +6,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Console extends JPanel {
-    public void console() {
-        SwingUtilities.invokeLater(() -> {
+    //constructeur de la classe Console
+    public Console() {
+        //utilisation de box layout avec un allignement vertical (Y_AXIS)
+        this.setLayout(new GridLayout(2, 1)); // utilisation de GridLayout pour avoir 2 rangées, 1 colonne
 
-            JPanel panel = new JPanel();
-            panel.setBackground(Color.BLUE);
+        CmdDeplacement cmdDeplacement = new CmdDeplacement(); //instanciation de CmdDeplacement
+        GestionPhotos gestionPhotos = new GestionPhotos(); //instanciation de GestionPhotos
 
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            int panelWidth = (int) (screenSize.width * 0.25);
-            int panelHeight = screenSize.height;
-            panel.setPreferredSize(new Dimension(panelWidth, panelHeight));
-
-            JPanel containerPanel = new JPanel(new BorderLayout());
-            containerPanel.add(panel, BorderLayout.EAST);
-
-            this.add(containerPanel, BorderLayout.CENTER);
-
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            GraphicsDevice gd = ge.getDefaultScreenDevice();
-
-            this.setVisible(true);
-        });
+        // Ajout de ces deux panneaux a la console
+        this.add(cmdDeplacement);
+        this.add(gestionPhotos);
     }
 }
+

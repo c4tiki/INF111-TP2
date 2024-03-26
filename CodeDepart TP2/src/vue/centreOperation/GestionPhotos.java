@@ -1,4 +1,6 @@
 package vue.centreOperation;
 
-public class GestionPhotos {
+import javax.swing.*;
+
+public class GestionPhotos extends JPanel {
 }
