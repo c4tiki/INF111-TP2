@@ -28,12 +28,10 @@ public class CadrePrincipale {
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
                 int result = JOptionPane.showConfirmDialog(frame,
-                        "Do you want to Exit ?", "Exit Confirmation : ",
+                        "Voulez-vous quitter le progrmame?", "Exit Confirmation : ",
                         JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION)
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                else if (result == JOptionPane.NO_OPTION)
-                    frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                    frame.dispose();
             }
         });
 
