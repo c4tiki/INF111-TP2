@@ -3,12 +3,13 @@ package vue;
 import javax.swing.*;
 import java.awt.*;
 
-public class PanneauPrincipale {
+
+public class PanneauPrincipale {extends JPanel{
     public static void main(String[] args) {
-        panneauPrincipale();
+        panneauPrincipale1();
     }
 
-    public static void panneauPrincipale() {
+    public static void panneauPrincipale1() {
         // Create a JFrame instance
         JFrame aFrame = new JFrame("Main Frame");
         // Get the screen size
@@ -41,7 +42,13 @@ public class PanneauPrincipale {
         // Make the frame visible
         aFrame.setVisible(true);
     }
+
+
 }
+
+
+}
+
 
 
 

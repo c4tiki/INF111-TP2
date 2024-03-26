@@ -1,4 +1,15 @@
+/*********************************************************************
+ * Par : Imane Ben Seghir
+ * Date : 26/03/2024
+ *
+ * Ce fichier définit la classe CadrePrincipale qui crée un cadre
+ * principal qui au moment de la fermeture affiche une demande de
+ * confirmation.
+ *********************************************************************/
 package vue;
+
+import vue.centreOperation.Console;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -7,42 +18,45 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
-//3.1 vue.CadrePrincipale
-//Le cadre principal institue le PanneauPrincipale et remplace son ContentPane avec ce dernier.
-//Le cadre principal doit définir le comportement du [X] pour qu’il demande une confirmation de
-//l’utilisateur, avant de fermer le programme.
+public class CadrePrincipale extends JFrame {
+    public static void main(String[] args) {
 
-public class CadrePrincipale {
-        public static void main(String[] args) {
-            cadreJframe();
+        CadrePrincipale cadrePrincipale = new CadrePrincipale();
+    }
+    /**
+     * Initialise et affiche le cadre Principal
+     *
+     * Cette méthode créé un JFrame servant de cadre principal de l'application
+     * Elle configure sa taille à la taille de l'écran et affiche un message de
+     * confirmation à la chaque tentative de fermeture de la fenètre de la part
+     * de l'utilisateur
+     * */
+    public CadrePrincipale() {
+        PanneauPrincipale panneauPrincipal = new PanneauPrincipale();
 
-        }
+        this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
 
-
-    public static void cadreJframe() {
-        JFrame frame = new JFrame();
-        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
-                int result = JOptionPane.showConfirmDialog(frame,
-                        "Do you want to Exit ?", "Exit Confirmation : ",
+                //
+                int result = JOptionPane.showConfirmDialog(this,
+                        "Voulez-vous quitter le progrmame?", "Exit Confirmation : ",
                         JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION)
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                else if (result == JOptionPane.NO_OPTION)
-                    frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                if (result == JOptionPane.YES_OPTION){
+                    //TODO FIX THIS
+                }
             }
         });
+        // this.pack();
+        this.setContentPane(panneauPrincipal);
+
+        Console console = new Console();
+        this.add(console);
 
 
-        // frame.pack();
-        frame.setVisible(true);
-
+        this.setVisible(true);
     }
-
 }
-
 
