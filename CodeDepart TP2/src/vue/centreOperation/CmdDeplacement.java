@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CmdDeplacement extends JPanel {
-
     private class PositionCourante extends JPanel {
         JLabel labelPositionX = new JLabel("Pos courante X: xxx");
         JLabel labelPositionY = new JLabel("Pos courante Y: yyy");
@@ -38,9 +37,10 @@ public class CmdDeplacement extends JPanel {
             panelX.add(Box.createHorizontalStrut(10)); // Espacement horizontal entre le label et le champ de texte
             textFieldPositionX.setMaximumSize(new Dimension(100, 20)); // Largeur illimitée, hauteur fixe
             panelX.add(textFieldPositionX);
-            panelX.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // Ajoute de l'espace autour des composants dans panelX
-            panelX.setMaximumSize(new Dimension(160, 60)); // Largeur et hauteur maximum pour panelX
+            panelX.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // Adjust the insets to center the components
+            panelX.setMaximumSize(new Dimension(250, 120)); // Largeur et hauteur maximum pour panelX
             panelX.setAlignmentX(Component.CENTER_ALIGNMENT);
+            panelX.setPreferredSize(new Dimension(100, 50)); // Largeur et hauteur préférées pour panelX
 
             // Panneau pour la position Y
             JPanel panelY = new JPanel();
@@ -49,19 +49,17 @@ public class CmdDeplacement extends JPanel {
             panelY.add(Box.createHorizontalStrut(10)); // Espacement horizontal entre le label et le champ de texte
             textFieldPositionY.setMaximumSize(new Dimension(100, 20)); // Largeur illimitée, hauteur fixe
             panelY.add(textFieldPositionY);
-            panelY.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // Ajoute de l'espace autour des composants dans panelY
-            panelY.setMaximumSize(new Dimension(160, 60)); // Largeur et hauteur maximum pour panelY
-            panelX.setAlignmentX(Component.CENTER_ALIGNMENT);
+            panelY.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // Adjust the insets to center the components
+            panelY.setMaximumSize(new Dimension(250, 150)); // Largeur et hauteur maximum pour panelY
+            panelY.setAlignmentX(Component.CENTER_ALIGNMENT);
+            panelY.setPreferredSize(new Dimension(100, 50)); // Largeur et hauteur préférées pour panelY
+
             // Ajouter les panneaux de position X et Y à PositionCible avec un espace plus grand entre eux
             add(panelX);
-            add(Box.createVerticalStrut(20)); // Espacement vertical plus grand entre panelX et panelY
+            add(Box.createVerticalStrut(5)); // Espacement vertical plus grand entre panelX et panelY
             add(panelY);
         }
-
-
     }
-
-
 
     public CmdDeplacement() {
         setBackground(Color.DARK_GRAY);
@@ -74,13 +72,14 @@ public class CmdDeplacement extends JPanel {
         boutonDeplacer.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Assurez-vous que le bouton a la même largeur que les composants de position
-        boutonDeplacer.setMaximumSize(new Dimension(positionCourante.getMaximumSize().width, 40));
+        boutonDeplacer.setPreferredSize(new Dimension(250, 50));
+        boutonDeplacer.setMaximumSize(new Dimension(250, 50));
 
         add(Box.createVerticalGlue());
         add(positionCourante);
         add(Box.createVerticalStrut(10)); // Espacement entre Position Courante et Position Cible
         add(positionCible);
-        add(Box.createVerticalStrut(10)); // Espacement entre Position Cible et le Bouton
+        add(Box.createVerticalStrut(5)); // Espacement entre Position Cible et le Bouton
         add(boutonDeplacer);
         add(Box.createVerticalGlue());
     }
