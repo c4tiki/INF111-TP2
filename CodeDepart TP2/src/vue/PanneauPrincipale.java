@@ -22,8 +22,10 @@ public class PanneauPrincipale extends JPanel {
         gbc.gridwidth = 3; //occupe 3 colonnes sur 4 donc 75%
         add(visuelRover, gbc);
 
+
         //Instanciation de console
         Console console = new Console();
+        console.setBackground(Color.BLUE);
         gbc.gridx = 3; //console commence a la 4ieme colonne
         gbc.weightx = 0.25; //prend 25% de lespace horizontal
         gbc.gridwidth = 1; //occupe 1 colonne sur 4
