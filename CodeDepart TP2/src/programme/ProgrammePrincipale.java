@@ -1,7 +1,7 @@
 package programme;
 
 import java.io.IOException;
-import observer.Observeur;
+
 import modele.centreOperation.CentreOperation;
 import modele.environnement.Lune;
 import modele.rover.Rover;
@@ -18,17 +18,17 @@ public class ProgrammePrincipale {
 	public static void main(String[] args){
 
 		// instantie la lune
-		Lune lune = Lune.getInstance();		
+		Lune lune = Lune.getInstance();
 		// instantie le satellite relai
 		SatelliteRelai satellite = new SatelliteRelai();
-		
+
 		// instantie le centre d'opération
 		CentreOperation centreOp = CentreOperation.getInstance();
 		centreOp.attacherSatellite(satellite);
 
 		// instantie le Rover
 		Rover rover = new Rover(satellite, lune, lune.obtenirPositionAlea());
-    	
+
 		// lie rover, centre d'opération et satellite
 		satellite.lierCentrOp(centreOp);
 		satellite.lierRover(rover);
@@ -39,7 +39,7 @@ public class ProgrammePrincipale {
 		satellite.start();
 		centreOPTache.start();
 		roverTache.start();
-		
+
 	}
 
 }

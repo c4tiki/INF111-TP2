@@ -130,22 +130,28 @@ public class CmdDeplacement extends JPanel implements Observeur {
         add(Box.createVerticalGlue());// Ajoute un espace vertical flexible en bas du panneau pour ajuster la disposition vers le bas
 
         boutonDeplacer.addActionListener(new ActionListener(){
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                // Valider que les valeurs sont des entiers
-                try {
-                    int posX = Integer.parseInt(textFieldPositionX.getText());
-                    int posY = Integer.parseInt(textFieldPositionY.getText());
+                // Vérifier si centreOperation est null
+                if (centreOperation != null) {
+                    // Valider que les valeurs sont des entiers
+                    try {
+                        int posX = Integer.parseInt(textFieldPositionX.getText());
+                        int posY = Integer.parseInt(textFieldPositionY.getText());
 
-                    // Envoyer la nouvelle position au centre d'opération pour déplacer le Rover
-                    centreOperation.deplacerRover(posX,posY);
+                        // Envoyer la nouvelle position au centre d'opération pour déplacer le Rover
+                        centreOperation.deplacerRover(posX,posY);
 
-                } catch (NumberFormatException ex) {
-                    // Afficher une erreur si les entrées des textFields ne sont pas des entiers valides
-                    JOptionPane.showMessageDialog(CmdDeplacement.this, "Veuillez entrer des entiers valides pour les positions X et Y.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    } catch (NumberFormatException ex) {
+                        // Afficher une erreur si les entrées des textFields ne sont pas des entiers valides
+                        JOptionPane.showMessageDialog(CmdDeplacement.this, "Veuillez entrer des entiers valides pour les positions X et Y.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    // Afficher un message d'erreur si centreOperation est null
+                    JOptionPane.showMessageDialog(CmdDeplacement.this, "Le centre d'opération n'est pas correctement initialisé.", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
         });
 
