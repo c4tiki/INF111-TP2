@@ -104,6 +104,7 @@ public class CmdDeplacement extends JPanel implements Observeur {
     public CmdDeplacement() {
         //intialisaton de CentreOperation
         this.centreOperation = CentreOperation.getInstance();
+        centreOperation.ajouterObserveur(this);
 
         //mettre la couleur de fond gris fonce
         setBackground(Color.DARK_GRAY);

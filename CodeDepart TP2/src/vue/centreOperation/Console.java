@@ -14,11 +14,11 @@ public class Console extends JPanel {
 
         CmdDeplacement cmdDeplacement = new CmdDeplacement(); //instanciation de CmdDeplacement
 
-        // cherche linstance singleton de centreOperation
-        CentreOperation centreOp = CentreOperation.getInstance();
-
-        // mettre CmdDeplacement commme un observateur de CentreOperation
-        centreOp.ajouterObserveur(cmdDeplacement);
+//        // cherche linstance singleton de centreOperation
+//        CentreOperation centreOp = CentreOperation.getInstance();
+//
+//        // mettre CmdDeplacement commme un observateur de CentreOperation
+//        centreOp.ajouterObserveur(cmdDeplacement);
 
         GestionPhotos gestionPhotos = new GestionPhotos(); //instanciation de GestionPhotos
 
