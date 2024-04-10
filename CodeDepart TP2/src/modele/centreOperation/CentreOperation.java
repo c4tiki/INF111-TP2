@@ -37,13 +37,29 @@ import modele.communication.Status;
 import modele.communication.TransporteurMessage;
 import modele.communication.eCommande;
 import modele.satelliteRelai.SatelliteRelai;
+import observer.Observable;
+import observer.Observeur;
 import utilitaires.CompteurMessage;
 import utilitaires.Vect2D;
 
 
 
 public class CentreOperation extends TransporteurMessage{
-	
+	//instanciation d'observable pour definir CentreOperation comme l'observable
+	private Observable observable = new Observable();
+
+	//implementation des methodes de l'observable
+	public void ajouterObserveur(Observeur observeur) {
+		observable.ajouter(observeur);
+	}
+
+	public void enleverObserveur(Observeur observeur) {
+		observable.enlever(observeur);
+	}
+
+	private void notifierObserveurs() {
+		observable.avertirObserveur();
+	}
 
 	// référence au fichier et stream permettant d'enregistrer les photos
 	// reçu dans un fichier
@@ -52,6 +68,12 @@ public class CentreOperation extends TransporteurMessage{
     int compteurPhoto = 0;
     
     Vect2D positionRover = null;
+
+	//methode qui donne acces a la position actuelle du rover
+	public Vect2D getPositionRover() {
+		return this.positionRover;
+	}
+
     double progresFichier = 0.0;
     double tailleCourante = 0.0;
     
@@ -173,6 +195,7 @@ public class CentreOperation extends TransporteurMessage{
 			System.out.println("Status reçu");
 			System.out.println("    position du Rover: " + msgStatus.getPosition());
 			positionRover = msgStatus.getPosition();
+			notifierObserveurs(); //qd il recoit la position du rover, il avertit ses observeurs(cmdDeplacement)
 		}
 	}
 	

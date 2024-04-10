@@ -1,16 +1,51 @@
 package vue.centreOperation;
 
+import modele.centreOperation.CentreOperation;
+import observer.Observeur;
+import utilitaires.Vect2D;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class CmdDeplacement extends JPanel {
+public class CmdDeplacement extends JPanel implements Observeur {
+
+    private CentreOperation centreOperation; // Référence au centre d'opération
+
+    //Declaration des positions initiales (-1 pour indiquer qu'elles sont pas definies)
+    private int posX = -1;
+    private int posY = -1;
+
+    //declaration des labels pour la position courante
+    private JLabel labelPositionX = new JLabel("Pos courante X: xxx");
+    private JLabel labelPositionY = new JLabel("Pos courante Y: yyy");
+
+    //declaration des textfields de position cible
+    private JTextField textFieldPositionX = new JTextField();
+    private JTextField textFieldPositionY = new JTextField();
+
+    //implementation de la methode avertir
+    @Override
+    public void avertir() {
+        SwingUtilities.invokeLater(() -> {
+            // Vérifier si la position du Rover est non-null et mettre à jour les JLabels
+            Vect2D position = CentreOperation.getInstance().getPositionRover();
+            if(position != null) {
+                labelPositionX.setText("Pos courante X: " + position.getX());
+                labelPositionY.setText("Pos courante Y: " + position.getY());
+            } else {
+                labelPositionX.setText("Pos courante X: xxx");
+                labelPositionY.setText("Pos courante Y: yyy");
+            }
+        });
+    }
+
     //definition de la classe interne Position Courante qui contient:
         //  position courante x
         // position courante y
     private class PositionCourante extends JPanel {
         //creer les labels pour la position courante x et y
-        JLabel labelPositionX = new JLabel("Pos courante X: xxx");
-        JLabel labelPositionY = new JLabel("Pos courante Y: yyy");
 
         public PositionCourante() {
             setBackground(Color.LIGHT_GRAY); //ajout de la couleur de fond du pannel PositionCourante
@@ -30,9 +65,7 @@ public class CmdDeplacement extends JPanel {
     private class PositionCible extends JPanel {
         //creer les labels et textFields pour la position cible x et y
         JLabel labelPositionX = new JLabel("Pos Cible X:");
-        JTextField textFieldPositionX = new JTextField();
         JLabel labelPositionY = new JLabel("Pos Cible Y:");
-        JTextField textFieldPositionY = new JTextField();
 
         public PositionCible() {
             //Utilisation d'un box layout avec une disposition verticale
@@ -69,6 +102,9 @@ public class CmdDeplacement extends JPanel {
     }
 
     public CmdDeplacement() {
+        //intialisaton de CentreOperation
+        this.centreOperation = CentreOperation.getInstance();
+
         //mettre la couleur de fond gris fonce
         setBackground(Color.DARK_GRAY);
         //utilisation du boxLayout vertical pour le panel CmdDeplacement
@@ -92,5 +128,26 @@ public class CmdDeplacement extends JPanel {
         add(Box.createVerticalStrut(5)); // Espacement vertical entre Position Cible et le Bouton
         add(boutonDeplacer); // Ajoute le bouton de déplacement au panneau
         add(Box.createVerticalGlue());// Ajoute un espace vertical flexible en bas du panneau pour ajuster la disposition vers le bas
+
+        boutonDeplacer.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // Valider que les valeurs sont des entiers
+                try {
+                    int posX = Integer.parseInt(textFieldPositionX.getText());
+                    int posY = Integer.parseInt(textFieldPositionY.getText());
+
+                    // Envoyer la nouvelle position au centre d'opération pour déplacer le Rover
+                    centreOperation.deplacerRover(posX,posY);
+
+                } catch (NumberFormatException ex) {
+                    // Afficher une erreur si les entrées des textFields ne sont pas des entiers valides
+                    JOptionPane.showMessageDialog(CmdDeplacement.this, "Veuillez entrer des entiers valides pour les positions X et Y.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
     }
 }

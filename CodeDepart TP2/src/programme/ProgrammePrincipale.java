@@ -1,7 +1,7 @@
 package programme;
 
 import java.io.IOException;
-
+import observer.Observeur;
 import modele.centreOperation.CentreOperation;
 import modele.environnement.Lune;
 import modele.rover.Rover;

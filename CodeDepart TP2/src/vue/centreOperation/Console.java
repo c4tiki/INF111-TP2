@@ -1,7 +1,7 @@
 package vue.centreOperation;
 
 import programme.ProgrammePrincipale;
-
+import modele.centreOperation.CentreOperation;
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,6 +13,13 @@ public class Console extends JPanel {
         this.setBackground(Color.blue);
 
         CmdDeplacement cmdDeplacement = new CmdDeplacement(); //instanciation de CmdDeplacement
+
+        // cherche linstance singleton de centreOperation
+        CentreOperation centreOp = CentreOperation.getInstance();
+
+        // mettre CmdDeplacement commme un observateur de CentreOperation
+        centreOp.ajouterObserveur(cmdDeplacement);
+
         GestionPhotos gestionPhotos = new GestionPhotos(); //instanciation de GestionPhotos
 
         // Ajout de ces deux panneaux a la console

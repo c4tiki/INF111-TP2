@@ -20,9 +20,7 @@
 
     public class CadrePrincipale extends JFrame {
         public static void main(String[] args) {
-
             CadrePrincipale cadrePrincipale = new CadrePrincipale();
-
         }
         /**
          * Initialise et affiche le cadre Principal
