@@ -10,7 +10,7 @@ public class Observable {
     public void ajouter(Observeur observer) {
         observers.add(observer);
     }
-    //methode permettand de supprimer un observateur
+    //methode permettant de supprimer un observateur
     public void enlever(Observeur observer) {
         observers.remove(observer);
     }

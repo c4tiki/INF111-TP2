@@ -18,7 +18,7 @@
     import javax.swing.JOptionPane;
 
 
-    public class CadrePrincipale extends JFrame {
+    public class CadrePrincipale extends JFrame implements Runnable {
         public static void main(String[] args) {
             CadrePrincipale cadrePrincipale = new CadrePrincipale();
         }
@@ -56,5 +56,10 @@
 
 
             this.setVisible(true);
+        }
+
+        @Override
+        public void run() {
+
         }
     }

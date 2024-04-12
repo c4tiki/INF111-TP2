@@ -1,12 +1,11 @@
 package programme;
 
-import java.io.IOException;
-
 import modele.centreOperation.CentreOperation;
 import modele.environnement.Lune;
 import modele.rover.Rover;
 import modele.satelliteRelai.SatelliteRelai;
 import utilitaires.Vect2D;
+import vue.CadrePrincipale;
 
 public class ProgrammePrincipale {
 
@@ -40,6 +39,7 @@ public class ProgrammePrincipale {
 		centreOPTache.start();
 		roverTache.start();
 
+		Thread t = new Thread(new CadrePrincipale());
+		t.start();
 	}
-
 }
