@@ -1,6 +1,7 @@
 package vue.centreOperation;
 
 import modele.centreOperation.CentreOperation;
+import observer.Observable;
 import observer.Observeur;
 
 import javax.swing.*;
@@ -10,11 +11,17 @@ import java.awt.event.ActionListener;
 
 public class GestionPhotos extends JPanel implements Observeur {
 
+    private CentreOperation centreOperation;
+
     private JList<String> listePhotos;
     private JButton btnPhoto;
     private JProgressBar barreProgres;
 
-    public GestionPhotos (){
+    public GestionPhotos() {
+
+        this.centreOperation = CentreOperation.getInstance();
+        centreOperation.ajouterObserveur(this);
+
 
         setBackground(Color.DARK_GRAY); //couleur de fond gris fonce
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); //disposition box layout verticale
@@ -30,6 +37,7 @@ public class GestionPhotos extends JPanel implements Observeur {
         //instanciation de la barre de progres
         barreProgres = new JProgressBar();
         barreProgres.setMaximumSize(new Dimension(220, 50)); //taille max barre de progres
+        barreProgres.setForeground(Color.BLUE);
         add(Box.createVerticalStrut(5)); //espace entre le haut du panneau et le bouton photo
         add(barreProgres);//ajout de lobjet barreProgres au panel GestionPhoto
 
@@ -50,6 +58,10 @@ public class GestionPhotos extends JPanel implements Observeur {
 
     @Override
     public void avertir() {
-        /*to do*/
+        SwingUtilities.invokeLater(() -> {
+            double progressionImage = CentreOperation.getInstance().getProgresFichier();
+            int valeurProgression = (int) (progressionImage * 100);
+            barreProgres.setValue(valeurProgression);
+        });
     }
 }

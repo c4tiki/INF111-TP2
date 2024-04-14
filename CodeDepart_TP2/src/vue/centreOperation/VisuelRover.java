@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 
+import observer.Observable;
 import observer.Observeur;
 import utilitaires.Vect2D;
 import modele.environnement.Cratere;
@@ -86,7 +87,7 @@ public class VisuelRover extends JPanel implements Observeur {
 
     @Override
     public void avertir() {
-        /*to do implements this*/
+        Observable.avertirObserveur();
     }
 }
 

@@ -58,7 +58,7 @@ public class CentreOperation extends TransporteurMessage{
 	}
 
 	private void notifierObserveurs() {
-		observable.avertirObserveur();
+		avertirObserveur();
 	}
 
 	// référence au fichier et stream permettant d'enregistrer les photos
@@ -156,11 +156,9 @@ public class CentreOperation extends TransporteurMessage{
 
 			// on écrit le morceau dans un fichier
 			try {
-				
 				// s'il ne s'agit pas de la fin
 				if(morceauIm.getFin()==false) {
-					
-					
+
 					// si aucun fichier n'est ouvert
 					if(photo==null) {
 
@@ -173,6 +171,7 @@ public class CentreOperation extends TransporteurMessage{
 					}
 					// on écrit le morceau dans un fichier ouvert
 					streamSortie.write(morceauIm.getMorceau());
+					notifierObserveurs();
 					
 
 					tailleCourante += (double)morceauIm.getMorceau().length;
@@ -202,3 +201,4 @@ public class CentreOperation extends TransporteurMessage{
 		return progresFichier;
 	}
 }
+
