@@ -1,7 +1,11 @@
 package vue.centreOperation;
 
+import modele.centreOperation.CentreOperation;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GestionPhotos extends JPanel {
 
@@ -35,5 +39,11 @@ public class GestionPhotos extends JPanel {
         add(Box.createVerticalStrut(5)); //espace entre le haut du panneau et le bouton photo
         add(listePhotos); //ajout de lobjet listePHotos au panel GestionPhoto
 
+        btnPhoto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CentreOperation.getInstance().prendrePhoto();
+            }
+        });
     }
 }

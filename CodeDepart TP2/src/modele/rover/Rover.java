@@ -167,18 +167,20 @@ public class Rover extends TransporteurMessage{
 		try {
 			// ouvre un fichier de photo
 			long tailleTotale = lune.ouvrirFichierPhoto(position);
-			
+			System.out.println("test 1");
 			// envoi tous les chunks jusqu'au dernier
 			while(lune.lireChunkPhoto(chunk)!=-1) {
 				MorceauImage morceauImage = new MorceauImage(compteurMsg.getCompteActuel(),chunk.clone(),tailleTotale);
 				envoyerMessage(morceauImage);
 				messageEnvoyes.add(morceauImage);
+				System.out.println("test 2");
 			}
 			
 			// envoi le message indiquant la fin de la photo
 			MorceauImage morceauImage = new MorceauImage(compteurMsg.getCompteActuel(),true);
 			envoyerMessage(morceauImage);
 			messageEnvoyes.add(morceauImage);
+			System.out.println("test 3");
 			
 		}catch(Exception e) {
 			System.out.println("echec prise image");

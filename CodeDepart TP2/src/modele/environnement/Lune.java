@@ -92,7 +92,7 @@ public class Lune {
 		int posYGrille = (int)Math.floor((position.getY())/(DIM_SITE.getY()/DIVISION_GRILLE));		
 		
 		// ouvre la photo correspondante à la position du Rover
-		fichierPhoto  = new File("images/" + IMAGES_SURFACE[posYGrille][posXGrille]);		
+		fichierPhoto  = new File("images/" + IMAGES_SURFACE[posYGrille][posXGrille]);
 		streamEntree = new FileInputStream(fichierPhoto);
 		return fichierPhoto.length();
 	}
