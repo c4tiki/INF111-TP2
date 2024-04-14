@@ -16,6 +16,8 @@ public class ProgrammePrincipale {
 	 */
 	public static void main(String[] args){
 
+//		System.out.println("Working Directory = " + System.getProperty("user.dir"));
+
 		// instantie la lune
 		Lune lune = Lune.getInstance();
 		// instantie le satellite relai
