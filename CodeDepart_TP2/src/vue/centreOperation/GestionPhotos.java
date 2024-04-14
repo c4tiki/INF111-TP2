@@ -1,13 +1,14 @@
 package vue.centreOperation;
 
 import modele.centreOperation.CentreOperation;
+import observer.Observeur;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GestionPhotos extends JPanel {
+public class GestionPhotos extends JPanel implements Observeur {
 
     private JList<String> listePhotos;
     private JButton btnPhoto;
@@ -45,5 +46,10 @@ public class GestionPhotos extends JPanel {
                 CentreOperation.getInstance().prendrePhoto();
             }
         });
+    }
+
+    @Override
+    public void avertir() {
+        /*to do*/
     }
 }

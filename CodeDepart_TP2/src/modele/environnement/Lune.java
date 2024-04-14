@@ -81,18 +81,16 @@ public class Lune {
 	 * 					  pas complétement transféré.
 	 */
 	public long ouvrirFichierPhoto(Vect2D position) throws Exception{
-		
 		// s'assure qu'aucune photo n'est déjà ouverte
 		if(fichierPhoto != null) {
 			throw new Exception("fichier photos déjà ouvert");
 		}
-		
 		// calcule position du rover dans la grille
 		int posXGrille = (int)Math.floor((position.getX())/(DIM_SITE.getX()/DIVISION_GRILLE));
-		int posYGrille = (int)Math.floor((position.getY())/(DIM_SITE.getY()/DIVISION_GRILLE));		
+		int posYGrille = (int)Math.floor((position.getY())/(DIM_SITE.getY()/DIVISION_GRILLE));
 		
 		// ouvre la photo correspondante à la position du Rover
-		fichierPhoto  = new File("images/" + IMAGES_SURFACE[posYGrille][posXGrille]);
+		fichierPhoto  = new File("CodeDepart_TP2\\images\\" + IMAGES_SURFACE[posYGrille][posXGrille]);
 		streamEntree = new FileInputStream(fichierPhoto);
 		return fichierPhoto.length();
 	}

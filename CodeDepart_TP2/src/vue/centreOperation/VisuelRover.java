@@ -3,9 +3,11 @@ package vue.centreOperation;
 
 import javax.swing.*;
 import java.awt.*;
+
+import observer.Observeur;
 import utilitaires.Vect2D;
 
-public class VisuelRover extends JPanel {
+public class VisuelRover extends JPanel implements Observeur {
     //creation des variables utilisé pour la conversion en pixel
     private double largeurLunaire;
     private double hauteurLunaire;
@@ -51,6 +53,11 @@ public class VisuelRover extends JPanel {
         double xPixel = positionLunaire.getX() * (largeurLunaire / dimSiteX);
         double yPixel = positionLunaire.getY() * (hauteurLunaire / dimSiteY);
         return new Vect2D(convertirLongueurToPixel(xPixel), convertirLongueurToPixel(yPixel));
+    }
+
+    @Override
+    public void avertir() {
+        /*to do implements this*/
     }
 }
 

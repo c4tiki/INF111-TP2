@@ -168,7 +168,7 @@ public class CentreOperation extends TransporteurMessage{
 						tailleCourante = 0.0;
 						
 						// on ouvre un fichier
-						photo = new File("photos/image"+compteurPhoto+".jpg");
+						photo = new File("CodeDepart_TP2/images"+compteurPhoto+".jpg");
 					    streamSortie = new FileOutputStream(photo);
 					}
 					// on écrit le morceau dans un fichier ouvert
@@ -198,5 +198,7 @@ public class CentreOperation extends TransporteurMessage{
 			notifierObserveurs(); //qd il recoit la position du rover, il avertit ses observeurs(cmdDeplacement)
 		}
 	}
-	
+	public double getProgresFichier() {
+		return progresFichier;
+	}
 }
