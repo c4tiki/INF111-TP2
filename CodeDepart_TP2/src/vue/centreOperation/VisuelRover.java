@@ -3,9 +3,13 @@ package vue.centreOperation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+
 
 import observer.Observeur;
 import utilitaires.Vect2D;
+import modele.environnement.Cratere;
+import modele.environnement.Lune;
 
 public class VisuelRover extends JPanel implements Observeur {
     //creation des variables utilisé pour la conversion en pixel
@@ -13,6 +17,16 @@ public class VisuelRover extends JPanel implements Observeur {
     private double hauteurLunaire;
     private double dimSiteX;
     private double dimSiteY;
+    // Crateres and Lune objects
+    private ArrayList<Cratere> crateres;
+    private Lune lune;
+
+    // Constructor with Lune and crateres
+    public VisuelRover(Lune lune, ArrayList<Cratere> crateres) {
+        this.lune = lune;
+        this.crateres = crateres;
+        this.setBackground(Color.BLACK);
+    }
 
 
     public VisuelRover() {
@@ -24,6 +38,21 @@ public class VisuelRover extends JPanel implements Observeur {
         super.paintComponent(g);
         // Définit la couleur pour le dessin du rover
         g.setColor(Color.BLUE);
+        // Draw craters
+        if (crateres != null && lune != null) {
+            for (Cratere cratere : crateres) {
+                // Calculate pixel position of the crater
+                Vect2D positionPixel = convertirPositionToPixel(cratere.getPosition());
+
+                // Draw a circle representing the crater
+                int x = (int) positionPixel.getX();
+                int y = (int) positionPixel.getY();
+                int diameter = 10; // Adjust as needed
+                g.setColor(Color.WHITE);
+                g.fillOval(x, y, diameter, diameter);
+            }
+        }
+
 
         /* TEST POUR VOIR SI CA MARCHE
         // Coordonnées et dimensions du "rover"
