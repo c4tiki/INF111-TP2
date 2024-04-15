@@ -32,6 +32,7 @@ public class VisuelRover extends JPanel implements Observeur {
 
     public VisuelRover() {
         this.setBackground(Color.BLACK);
+        setOpaque(false);
     }
 
     @Override
@@ -40,22 +41,10 @@ public class VisuelRover extends JPanel implements Observeur {
         // Définit la couleur pour le dessin du rover
         g.setColor(Color.BLUE);
         // Draw craters
-        if (crateres != null && lune != null) {
-            for (Cratere cratere : crateres) {
-                // Calculate pixel position of the crater
-                Vect2D positionPixel = convertirPositionToPixel(cratere.getPosition());
-
-                // Draw a circle representing the crater
-                int x = (int) positionPixel.getX();
-                int y = (int) positionPixel.getY();
-                int diameter = 10; // Adjust as needed
-                g.setColor(Color.WHITE);
-                g.fillOval(x, y, diameter, diameter);
-            }
-        }
 
 
-        /* TEST POUR VOIR SI CA MARCHE
+
+        // TEST POUR VOIR SI CA MARCHE
         // Coordonnées et dimensions du "rover"
         int roverX = 50; // Position X du rover
         int roverY = 50; // Position Y du rover
@@ -64,7 +53,7 @@ public class VisuelRover extends JPanel implements Observeur {
 
         // Dessine le rover comme un cercle (ou ovale si la largeur et la hauteur sont différentes)
         g.fillOval(roverX, roverY, roverWidth, roverHeight);
-        */
+
     }
 
     public VisuelRover(double largeurLunaire, double hauteurLunaire, double dimSiteX, double dimSiteY) {
