@@ -1,5 +1,6 @@
 package vue.centreOperation;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,6 +13,12 @@ import modele.environnement.Lune;
 import observer.Observable;
 
 public class VisuelRover extends JPanel implements Observeur {
+    //creation des variables utilisé pour la conversion en pixel
+    private double largeurLunaire;
+    private double hauteurLunaire;
+    private double dimSiteX;
+    private double dimSiteY;
+    // Crateres and Lune objects
     private ArrayList<Cratere> crateres;
     private Vect2D roverPosition;
 
@@ -32,12 +39,64 @@ public class VisuelRover extends JPanel implements Observeur {
         int maxHeight = getHeight();
         int caseWidth = maxWidth/10;
         int caseHeight = maxHeight/10;
+        int compteurNombre = 0;
+
+        // Définir la police, le style et la taille du texte
+        Font font = new Font("Times New Roman", Font.PLAIN, 25);
+        g.setFont(font);
+
         for (int c = 0; c < maxWidth; c += caseHeight) {
             drawDashedLine(g, 0, c, maxWidth, c);
         }
         for (int c = 0; c < maxWidth; c += caseWidth) {
             drawDashedLine(g, c, 0, c, maxHeight);
         }
+
+        for (int n = 0; n <= 200; n += 20) {
+            g.drawString(Integer.toString(n), 5, compteurNombre * caseHeight + 20);
+            compteurNombre++;
+        }
+
+        compteurNombre = 1;
+        for (int n = 20; n <= 200; n += 20) {
+            g.drawString(Integer.toString(n), compteurNombre * caseWidth + 5, 20); // Ajuster la hauteur pour le centrage
+            compteurNombre++;
+        }
+
+        // Définit la couleur pour le dessin du rover
+        g.setColor(Color.BLUE);
+        // Draw craters
+        if (crateres != null && lune != null) {
+            for (Cratere cratere : crateres) {
+                // Calculate pixel position of the crater
+                Vect2D positionPixel = convertirPositionToPixel(cratere.getPosition());
+
+                // Draw a circle representing the crater
+                int x = (int) positionPixel.getX();
+                int y = (int) positionPixel.getY();
+                int diameter = 10; // Adjust as needed
+                g.setColor(Color.WHITE);
+                g.fillOval(x, y, diameter, diameter);
+            }
+        }
+
+
+        // TEST POUR VOIR SI CA MARCHE
+        // Coordonnées et dimensions du "rover"
+        int roverX = 50; // Position X du rover
+        int roverY = 50; // Position Y du rover
+        int roverWidth = 30; // Largeur du rover
+        int roverHeight = 30; // Hauteur du rover
+
+        // Dessine le rover comme un cercle (ou ovale si la largeur et la hauteur sont différentes)
+        g.fillOval(roverX, roverY, roverWidth, roverHeight);
+
+        int X = 150; // Position X du rover
+        int Y = 150; // Position Y du rover
+        int Width = 20; // Largeur du rover
+        int Height = 20; // Hauteur du rover
+        g.setColor(Color.GRAY);
+        g.fillOval(X, Y, Width, Height);
 
     }
     public void drawDashedLine(Graphics g, int x1, int y1, int x2, int y2){
