@@ -42,11 +42,28 @@ public class VisuelRover extends JPanel implements Observeur {
         int maxHeight = getHeight();
         int caseWidth = maxWidth/10;
         int caseHeight = maxHeight/10;
+        int compteurNombre = 0;
+
+        // Définir la police, le style et la taille du texte
+        Font font = new Font("Times New Roman", Font.PLAIN, 25);
+        g.setFont(font);
+
         for (int c = 0; c < maxWidth; c += caseHeight) {
             drawDashedLine(g, 0, c, maxWidth, c);
         }
         for (int c = 0; c < maxWidth; c += caseWidth) {
             drawDashedLine(g, c, 0, c, maxHeight);
+        }
+
+        for (int n = 0; n <= 200; n += 20) {
+            g.drawString(Integer.toString(n), 5, compteurNombre * caseHeight + 20);
+            compteurNombre++;
+        }
+
+        compteurNombre = 1;
+        for (int n = 20; n <= 200; n += 20) {
+            g.drawString(Integer.toString(n), compteurNombre * caseWidth + 5, 20); // Ajuster la hauteur pour le centrage
+            compteurNombre++;
         }
 
         // Définit la couleur pour le dessin du rover
