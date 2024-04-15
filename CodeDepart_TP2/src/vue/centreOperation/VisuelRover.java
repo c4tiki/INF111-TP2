@@ -32,6 +32,7 @@ public class VisuelRover extends JPanel implements Observeur {
 
     public VisuelRover() {
         this.setBackground(Color.BLACK);
+        setOpaque(false);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class VisuelRover extends JPanel implements Observeur {
         }
 
 
-        /* TEST POUR VOIR SI CA MARCHE
+        // TEST POUR VOIR SI CA MARCHE
         // Coordonnées et dimensions du "rover"
         int roverX = 50; // Position X du rover
         int roverY = 50; // Position Y du rover
@@ -64,7 +65,14 @@ public class VisuelRover extends JPanel implements Observeur {
 
         // Dessine le rover comme un cercle (ou ovale si la largeur et la hauteur sont différentes)
         g.fillOval(roverX, roverY, roverWidth, roverHeight);
-        */
+
+        int X = 150; // Position X du rover
+        int Y = 150; // Position Y du rover
+        int Width = 20; // Largeur du rover
+        int Height = 20; // Hauteur du rover
+        g.setColor(Color.GRAY);
+        g.fillOval(X, Y, Width, Height);
+
     }
 
     public VisuelRover(double largeurLunaire, double hauteurLunaire, double dimSiteX, double dimSiteY) {

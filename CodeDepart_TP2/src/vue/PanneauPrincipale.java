@@ -18,7 +18,7 @@ public class PanneauPrincipale extends JPanel {
 
         //Instanciation de visuelRover
         VisuelRover visuelRover = new VisuelRover();
-        visuelRover.setBackground(Color.RED);
+        //visuelRover.setBackground(Color.RED);
         gbc.weightx = 0.75; //occupe 75% de l'espace horizontal
         gbc.gridwidth = 3; //occupe 3 colonnes sur 4 donc 75%
         add(visuelRover, gbc);
