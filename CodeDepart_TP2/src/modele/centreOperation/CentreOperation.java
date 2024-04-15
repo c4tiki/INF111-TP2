@@ -89,15 +89,19 @@ public class CentreOperation extends TransporteurMessage{
      * Constructeur, requiert une référence au satellite
      * @param satellite, reférence au satellite
      */
-	private CentreOperation(){
+	public CentreOperation(SatelliteRelai satellite) {
 		super();
+		this.satellite = satellite;
 	}
 
 	/**
 	 * Méthode permettant d'obtenir une référence sur le centre de contrôle
 	 * @return une référence sur le centre de contrôle
 	 */
-	public static CentreOperation getInstance() {
+	public static CentreOperation getInstance(SatelliteRelai satellite) {
+		if (instance == null) {
+			instance = new CentreOperation(satellite);
+		}
 		return instance;
 	}
 	
@@ -113,15 +117,13 @@ public class CentreOperation extends TransporteurMessage{
 	 * Méthode envoyant la commande de prendre une photo
 	 */
 	public void prendrePhoto() {
-		
 		System.out.println("Prendre Photo");
 		Commande msgCmd = new Commande(compteurMsg.getCompteActuel(),eCommande.PRENDRE_PHOTOS);
 		satellite.envoyerMessageVersRover(msgCmd);
 		messageEnvoyes.add(msgCmd);
-
 		progresFichier = 0;
 	}
-	
+
 	/**
 	 * Méthode envoyant la commande de déplacer le Rover
 	 * @param posX position en X
@@ -130,7 +132,9 @@ public class CentreOperation extends TransporteurMessage{
 	public void deplacerRover(double posX,double posY) {
 		Commande msgCmd = new CmdDeplacerRover(compteurMsg.getCompteActuel(),new Vect2D(posX,posY));
 		satellite.envoyerMessageVersRover(msgCmd);
-		messageEnvoyes.add(msgCmd);		
+		messageEnvoyes.add(msgCmd);
+		this.positionRover = new Vect2D(posX, posY); // Update position immediately for UI responsiveness
+		notifierObserveurs(); // Notify observers immediately to update the UI
 	}
 
 
@@ -150,9 +154,9 @@ public class CentreOperation extends TransporteurMessage{
 
 		// vérifie s'il s'agit d'un message contenant un morceau d'image
 		if(msg instanceof MorceauImage) {
-			
+
 			// oui, on cast le message en MorceauImage
-			MorceauImage morceauIm = (MorceauImage)msg; 
+			MorceauImage morceauIm = (MorceauImage)msg;
 
 			// on écrit le morceau dans un fichier
 			try {
@@ -164,26 +168,27 @@ public class CentreOperation extends TransporteurMessage{
 
 						System.out.println("Reception d'une photo, début");
 						tailleCourante = 0.0;
-						
+
 						// on ouvre un fichier
-						photo = new File("CodeDepart_TP2/photos/image"+compteurPhoto+".jpg");					    streamSortie = new FileOutputStream(photo);
+						photo = new File("CodeDepart_TP2/photos/image"+compteurPhoto+".jpg");
+						streamSortie = new FileOutputStream(photo);
 					}
 					// on écrit le morceau dans un fichier ouvert
 					streamSortie.write(morceauIm.getMorceau());
 					notifierObserveurs();
-					
+
 
 					tailleCourante += (double)morceauIm.getMorceau().length;
 					progresFichier = tailleCourante/morceauIm.getTailleTotale();
-					
+
 				}else {
 					// ferme le fichier
 					streamSortie.close();
 					photo = null;
 					compteurPhoto++;
-					
+
 					System.out.println("Reception d'une photo, terminé");
-					
+
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -192,7 +197,7 @@ public class CentreOperation extends TransporteurMessage{
 			Status msgStatus = (Status)msg;
 			System.out.println("Status reçu");
 			System.out.println("    position du Rover: " + msgStatus.getPosition());
-			positionRover = msgStatus.getPosition();
+			this.positionRover = msgStatus.getPosition();
 			notifierObserveurs(); //qd il recoit la position du rover, il avertit ses observeurs(cmdDeplacement)
 		}
 	}
