@@ -65,7 +65,7 @@ public class CentreOperation extends TransporteurMessage{
 	// reçu dans un fichier
 	private File photo = null;
     FileOutputStream streamSortie;
-    int compteurPhoto = 0;
+    int compteurPhoto = 2;
     
     Vect2D positionRover = null;
 
@@ -166,8 +166,7 @@ public class CentreOperation extends TransporteurMessage{
 						tailleCourante = 0.0;
 						
 						// on ouvre un fichier
-						photo = new File("CodeDepart_TP2/images"+compteurPhoto+".jpg");
-					    streamSortie = new FileOutputStream(photo);
+						photo = new File("CodeDepart_TP2/photos/image"+compteurPhoto+".jpg");					    streamSortie = new FileOutputStream(photo);
 					}
 					// on écrit le morceau dans un fichier ouvert
 					streamSortie.write(morceauIm.getMorceau());
