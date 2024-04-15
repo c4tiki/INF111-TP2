@@ -38,6 +38,17 @@ public class VisuelRover extends JPanel implements Observeur {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        int maxWidth = getWidth();
+        int maxHeight = getHeight();
+        int caseWidth = maxWidth/10;
+        int caseHeight = maxHeight/10;
+        for (int c = 0; c < maxWidth; c += caseHeight) {
+            drawDashedLine(g, 0, c, maxWidth, c);
+        }
+        for (int c = 0; c < maxWidth; c += caseWidth) {
+            drawDashedLine(g, c, 0, c, maxHeight);
+        }
+
         // Définit la couleur pour le dessin du rover
         g.setColor(Color.BLUE);
         // Draw craters
@@ -93,10 +104,18 @@ public class VisuelRover extends JPanel implements Observeur {
         return new Vect2D(convertirLongueurToPixel(xPixel), convertirLongueurToPixel(yPixel));
     }
 
+    public void drawDashedLine(Graphics g, int x1, int y1, int x2, int y2){
+        Graphics2D g2d = (Graphics2D) g;
+        //float dash[] = {10.0f};
+        Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
+        g2d.setStroke(dashed);
+        g2d.drawLine(x1, y1, x2, y2);
+    }
+
+
+
     @Override
     public void avertir() {
 
     }
 }
-
-

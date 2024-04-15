@@ -49,3 +49,5 @@ public class Cratere {
 		return position;
 	}
 }
+
+
