@@ -61,7 +61,8 @@ public class VisuelRover extends JPanel implements Observeur {
             compteurNombre++;
         }
 
-
+        // Définit la couleur pour le dessin du rover
+        g.setColor(Color.LIGHT_GRAY);
         // Draw craters
         if (crateres != null && lune != null) {
             for (Cratere cratere : crateres) {
@@ -98,6 +99,7 @@ public class VisuelRover extends JPanel implements Observeur {
     }
     public void drawDashedLine(Graphics g, int x1, int y1, int x2, int y2){
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.LIGHT_GRAY);
         //float dash[] = {10.0f};
         Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
         g2d.setStroke(dashed);
