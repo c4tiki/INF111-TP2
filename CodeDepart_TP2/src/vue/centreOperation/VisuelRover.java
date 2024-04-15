@@ -95,7 +95,7 @@ public class VisuelRover extends JPanel implements Observeur {
 
     @Override
     public void avertir() {
-        Observable.avertirObserveur();
+
     }
 }
 
