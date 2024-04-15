@@ -198,7 +198,7 @@ public class CentreOperation extends TransporteurMessage{
 		}
 	}
 	public double getProgresFichier() {
-		return progresFichier;
+		return progresFichier; //Get la valeur pour la barre de progression
 	}
 }
 

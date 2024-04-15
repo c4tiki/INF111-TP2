@@ -8,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Vector;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class GestionPhotos extends JPanel implements Observeur {
 
@@ -42,11 +45,26 @@ public class GestionPhotos extends JPanel implements Observeur {
         add(barreProgres);//ajout de lobjet barreProgres au panel GestionPhoto
 
         //instanciation de la listePhotos
-        listePhotos = new JList<>();
+        listePhotos = new JList<String>();
         listePhotos.setBackground(Color.WHITE); //fond blanc pour la liste
         listePhotos.setMaximumSize(new Dimension(300, 250)); //taille max de la liste
         add(Box.createVerticalStrut(5)); //espace entre le haut du panneau et le bouton photo
         add(listePhotos); //ajout de lobjet listePHotos au panel GestionPhoto
+
+        Vector<String> contenuListe = new Vector<>();
+
+        try {
+            File[] fichiers = new File("CodeDepart_TP2\\photos").listFiles();
+            for (File fichier : fichiers) {
+                System.out.println(fichier.getName());
+                contenuListe.addElement(fichier.getName());
+            }
+
+            listePhotos.setListData(contenuListe);
+        }
+        catch(Exception e){
+            System.out.println("Erreur dans la liste");
+        }
 
         btnPhoto.addActionListener(new ActionListener() {
             @Override
