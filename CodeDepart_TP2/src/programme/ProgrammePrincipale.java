@@ -22,7 +22,7 @@ public class ProgrammePrincipale {
 		SatelliteRelai satellite = new SatelliteRelai();
 
 		// instantie le centre d'opération
-		CentreOperation centreOp = CentreOperation.getInstance(satellite);
+		CentreOperation centreOp = CentreOperation.getInstance();
 		centreOp.attacherSatellite(satellite);
 
 		// instantie le Rover

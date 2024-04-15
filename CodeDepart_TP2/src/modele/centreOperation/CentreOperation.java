@@ -89,19 +89,15 @@ public class CentreOperation extends TransporteurMessage{
      * Constructeur, requiert une référence au satellite
      * @param satellite, reférence au satellite
      */
-	public CentreOperation(SatelliteRelai satellite) {
+	private CentreOperation(){
 		super();
-		this.satellite = satellite;
 	}
 
 	/**
 	 * Méthode permettant d'obtenir une référence sur le centre de contrôle
 	 * @return une référence sur le centre de contrôle
 	 */
-	public static CentreOperation getInstance(SatelliteRelai satellite) {
-		if (instance == null) {
-			instance = new CentreOperation(satellite);
-		}
+	public static CentreOperation getInstance() {
 		return instance;
 	}
 	

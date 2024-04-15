@@ -14,13 +14,11 @@ import observer.Observable;
 
 public class VisuelRover extends JPanel implements Observeur {
     //creation des variables utilisé pour la conversion en pixel
-    private double largeurLunaire;
-    private double hauteurLunaire;
-    private double dimSiteX;
-    private double dimSiteY;
+
     // Crateres and Lune objects
     private ArrayList<Cratere> crateres;
     private Vect2D roverPosition;
+    private Lune lune;
 
     public VisuelRover() {
         this.setBackground(Color.BLACK);
@@ -63,8 +61,7 @@ public class VisuelRover extends JPanel implements Observeur {
             compteurNombre++;
         }
 
-        // Définit la couleur pour le dessin du rover
-        g.setColor(Color.BLUE);
+
         // Draw craters
         if (crateres != null && lune != null) {
             for (Cratere cratere : crateres) {
